@@ -1,9 +1,8 @@
-import { createStore, createEvent, createEffect } from 'effector';
+import { createStore, createEvent } from 'effector';
 
-const $shop = createStore([]);
+export const setCategory = createEvent();
 
-const addProduct = createEvent();
-const removeProduct = createEvent();
-
-$shop.on(addProduct, (state, product) => [...state, product]);
-$shop.on(removeProduct, (state, product) => state.filter((p) => p.id !== product.id));
+export const $currentCategory = createStore('all').on(
+	setCategory,
+	(_, category) => category,
+);

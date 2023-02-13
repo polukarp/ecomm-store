@@ -1,16 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 
 const Home = () => {
 	return (
 		<MainLayout>
-			<h1>Lorem ipsum dolor sit amet.</h1>
-			<p>you are on the main page</p>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque corporis nulla qui
-				fugiat magnam sequi alias reiciendis illum excepturi cum?
-			</p>
-			<button>shop now</button>
+			<div className={`flex flex-col lg:flex-row justify-center h-[calc(100vh-96px)]`}>
+				<div className="flex-1 flex flex-col justify-center gap-3">
+					<h1 className="text-4xl lg:text-6xl font-black uppercase">
+						Welcome to SHOOOOOOOPE
+					</h1>
+					<div>
+						<p className="text-lg">Where shopping is an adventure 🛍️</p>
+					</div>
+				</div>
+				<div className="flex-1 flex justify-evenly flex-wrap lg:flex-col">
+					<Link to={'/catalog'}>
+						<button className="btn h-40 flex w-full btn-outline text-4xl">
+							Shop Now
+						</button>
+					</Link>
+				</div>
+			</div>
 		</MainLayout>
 	);
 };

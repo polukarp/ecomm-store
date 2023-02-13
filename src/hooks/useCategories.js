@@ -8,7 +8,7 @@ export const useCategories = () => {
 		const fetchCategories = async () => {
 			const response = await fetch('https://fakestoreapi.com/products/categories');
 			const data = await response.json();
-			setCategories(data);
+			setCategories(['all', ...data]);
 			setLoading(false);
 		};
 		fetchCategories();

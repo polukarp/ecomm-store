@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Product from '../components/Product';
 import { useProducts } from '../hooks/useProducts';
 import LayoutWithSidebar from '../layouts/LayoutWithSidebar';
+import ProductsLayout from '../layouts/ProductsLayout';
+import { $currentCategory } from '../store/shop';
+import { useStore } from 'effector-react';
 
 const Catalog = () => {
-	const { products } = useProducts();
+	const category = useStore($currentCategory);
+	const { products, loading, setCategory } = useProducts();
 
-	console.log(products);
+	useEffect(() => {
+		setCategory(category);
+	}, [setCategory, category]);
 
 	return (
 		<LayoutWithSidebar>
-			<div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-				{products.map((product) => (
-					<Product key={product.id} {...product} />
-				))}
-			</div>
+			<ProductsLayout>
+				{loading && <p>Loading...</p>}
+				{products
+					.filter((product) => category === 'all' || product.category === category)
+					.map((product) => (
+						<Product key={product.id} {...product} />
+					))}
+			</ProductsLayout>
 		</LayoutWithSidebar>
 	);
 };
